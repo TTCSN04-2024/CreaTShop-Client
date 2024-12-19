@@ -3,46 +3,95 @@ import "./App.css";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import SignUp from "./pages/SignUp";
-import InfoAccount from "./pages/InfoAccount";
 import MainLayout from "./layout/MainLayout";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./layout/AdminDashboard";
+import AdminProduct from "./components/Admin/AdminProduct";
+import AdminOrder from "./components/Admin/AdminOrder";
+import AdminCategory from "./components/Admin/AdminCategory";
+import AdminUser from "./components/Admin/AdminUser";
+import Dashboard from "./pages/Dashboard";
+import AdminRoute from "./components/Admin/AdminRoute";
+import Profile from "./pages/Profile";
+import Shop from "./components/Shop/Shop";
+import ProductDetail from "./components/ProductDetail/ProductDetail";
+import Cart from "./pages/Cart";
+import CheckOut from "./pages/CheckOut";
+
 
 function App() {
   const routers = useRoutes([
     {
-      path:'/',
-      element:<MainLayout/>,
-      children:[
+      path: "/",
+      element: <MainLayout />,
+      children: [
         {
-          path: '',
-          element: <Home/>
+          path: "",
+          element: <Home />,
         },
         {
-          path:'/login',
-          element:<Login/>
+          path: "/login",
+          element: <Login />,
         },
         {
-          path:'/signup',
-          element:<SignUp/>
+          path: "/signup",
+          element: <SignUp />,
         },
         {
-          path:'/profile',
-          element:<InfoAccount/>
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path:'/shop',
+          element: <Shop/>,
+        },{
+          path:'/product/:id',
+          element: <ProductDetail/>,
+        },{
+          path: '/cart',
+          element: <Cart />,
+        },{
+          path: '/checkout',
+          element: <CheckOut />
         }
-      ]
+      ],
     },
     {
-      path: '*',
-      element: <NotFound/>
-    }
+      path: "*",
+      element: <NotFound />,
+    },
+    {
+      path: "/admin",
+      element: <AdminRoute />, 
+      children: [
+        {
+          path: "dashboard",
+          element: <Dashboard />,
+        },
+        {
+          path: "products",
+          element: <AdminProduct />,
+        },
+        {
+          path: "orders",
+          element: <AdminOrder />,
+        },
+        {
+          path: "categories",
+          element: <AdminCategory />,
+        },{
+          
+        },
+        {
+          path: "users",
+          element: <AdminUser />,
+        },
+      ],
+    },
 
+  ]);
 
-  ])
-  return (
-    <>
-      {routers}
-    </>
-  );
+  return <>{routers}</>;
 }
 
 export default App;
