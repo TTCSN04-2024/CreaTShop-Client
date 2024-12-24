@@ -238,7 +238,7 @@ const Cart = () => {
 								</div>
 							</div>
 						</div>
-						<button onClick={makePayment} className=' w-full bg-red-500 text-white py-3 mt-3'>
+						<button disabled={cartLength === 0} onClick={makePayment} className=' w-full bg-red-500 text-white py-3 mt-3'>
 							Checkout
 						</button>
 					</div>
