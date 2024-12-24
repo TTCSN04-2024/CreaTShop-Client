@@ -1,33 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import useAuth from '../hook/useAuth';
 import {FaShoppingCart} from 'react-icons/fa';
+import {useSelector} from 'react-redux';
 import axios from 'axios';
+
 const Header = () => {
 	const currentUser = useAuth();
 	const {clearUser} = useAuth();
-	const [cartItemCount, setCartItemCount] = useState(0);
-	const getAllCart = async() =>{
-		try{
-			const res = await axios.get(`${import.meta.env.VITE_API_URL}/carts`, {
-				headers: {
-					'Authorization': `Bearer ${currentUser?.user?.token}`
-				}
-			})
-			setCartItemCount(res.data.data.length)
-		}
-		catch(err){
-		}
-	}
+	const authen = useAuth();
+	const cartQuantity = useSelector((state) => state.cart.cartQuantity);
+	// const [totalQuantity, setTotalQuantity] = React.useState(0);
 
-	useEffect(()=>{
-		getAllCart()
-	},[])
+	const [cartItems, setCartItems] = React.useState([]);
 
 	const handleLogout = () => {
 		clearUser();
 		window.location.href = '/';
 	};
+
+	const getAllCart = async () => {
+		try {
+			const res = await axios.get(`${import.meta.env.VITE_API_URL}/carts`, {
+				headers: {
+					Authorization: `Bearer ${authen?.user?.token}`,
+				},
+			});
+			console.log('resCart', res.data.data);
+			setCartItems(res.data.data);
+			// setTotalQuantity(res.data.data.reduce((total, item) => total + item.quantity, 0));
+		} catch (error) {
+			console.log(error);
+			toast.error('Lấy giỏ hàng thất bại!');
+		}
+	};
+
+	useEffect(() => {
+		getAllCart();
+	}, []);
+	const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+	console.log('totalQuantity',totalQuantity)
 
 	return (
 		<>
@@ -59,40 +71,32 @@ const Header = () => {
 								Shop
 							</NavLink>
 						</ul>
-						<div className=''>
-							<input
-								type='text'
-								placeholder='Search....'
-								className='border-2 border-gray-300 rounded-md py-2 px-4 w-full'
-							/>
-						</div>
 						<div className='flex items-center space-x-6'>
-							{/** Giỏ hàng */}
+							{/* Giỏ hàng */}
 							<div>
 								<Link to={'/cart'} className='relative'>
 									<FaShoppingCart className='text-2xl' />
-									{/**Biểu tượng số lượng sản phẩm */}
-									{cartItemCount > 0 ? (
+									{/* {totalQuantity > 0 ? (
 										<div className='absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center'>
-											{cartItemCount}
+											{totalQuantity}
 										</div>
-									):(
+									) : (
 										<div className='absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center'>
-											{cartItemCount}
+											0
 										</div>
-									)}
+									)} */}
 								</Link>
 							</div>
 
-							{/** Kiểm tra trạng thái đăng nhập */}
+							{/* Kiểm tra trạng thái đăng nhập */}
 							{currentUser?.user?.token ? (
 								<div className='relative group'>
 									<button className='flex items-center space-x-2'>
 										<i className='fas fa-user-circle text-2xl'></i>
 										<span>Xin chào, {currentUser.user.firstName}</span>
 									</button>
-									<ul className='absolute right-0 mt-2 w-48 bg-white rounded shadow-lg hidden group-hover:block'>
-										<li className='px-4 py-3 hover:bg-blue-500 hover:text-white'>
+									<ul className='absolute right-0 left-2 top-4 border rounded mt-2 w-48 bg-white rounded shadow-lg hidden group-hover:block'>
+										<li className='px-4 py-3 rounded hover:bg-blue-500 hover:text-white'>
 											<Link to='/profile'>Profile</Link>
 										</li>
 										{currentUser.user?.roles === 'ROLE_ADMIN' && (
@@ -100,7 +104,7 @@ const Header = () => {
 												<Link to='/admin/dashboard'>Admin</Link>
 											</li>
 										)}
-										<li className='px-4 py-3 hover:bg-blue-500 hover:text-white'>
+										<li className='rounded px-4 py-3 hover:bg-blue-500 hover:text-white'>
 											<button onClick={handleLogout}>Logout</button>
 										</li>
 									</ul>
