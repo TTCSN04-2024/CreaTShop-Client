@@ -1,9 +1,15 @@
 .sidebar-admin {
     width: 350px;
     background-color: #f8f9fa;
-    height: 100vh;
+    height: 100vh; /* Đảm bảo chiều cao full màn hình */
+    position: fixed; /* Cố định sidebar bên trái */
+    top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
+    z-index: 1000; /* Đảm bảo sidebar nằm trên các thành phần khác */
+    border-right: 1px solid #e9ecef;
+    overflow-y: auto; /* Nếu menu dài, cho phép cuộn */
 }
 
 .sidebar-admin__logo {
@@ -16,6 +22,7 @@
 .sidebar-admin__menu {
     display: flex;
     flex-direction: column;
+    flex: 1; /* Đẩy nội dung menu */
 }
 
 .sidebar-admin__menu-item {
