@@ -20,17 +20,17 @@ const CategoryCard = () => {
             key={index}
             className="relative group h-48 overflow-hidden rounded-lg shadow-lg transition-transform transform hover:scale-105"
           >
-            {/* Background Image */}
+            {/** Background Image */}
             <img
               src={category.image}
               alt={category.name}
               className="w-full h-full object-cover"
             />
-            {/* Text Overlay */}
+            {/** Text Overlay */}
             <div className="absolute bottom-4 left-4 text-white font-bold text-lg md:text-xl drop-shadow-lg">
               {category.name}
             </div>
-            {/* Glass Effect */}
+            {/** Glass Effect */}
             <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
           </div>
         ))}
