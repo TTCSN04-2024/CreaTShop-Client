@@ -5,8 +5,8 @@ import {Link } from 'react-router-dom';
 
 const SignUp = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="border border-gray-300 px-32 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center h-screen">
+      <div className="border border-gray-300 px-32 py-10 rounded-lg shadow-lg">
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-4xl font-bold mb-4">Sign up</h1>
           <Formik
