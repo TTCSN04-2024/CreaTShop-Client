@@ -106,7 +106,7 @@ const AdminCategory = () => {
 	return (
 		<div className=''>
 			<div className='container mx-auto p-6'>
-				<h1>Admin Category</h1>
+				<h1 className='text-2xl font-bold mb-4'>Admin Category</h1>
 				<button onClick={() => setIsModalOpen(true)} type='button' className='bg-red-700 p-2 text-white rounded-lg'>
 					Thêm danh mục
 				</button>

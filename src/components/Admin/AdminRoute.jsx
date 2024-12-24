@@ -23,7 +23,6 @@ const AdminRoute = () => {
 
 	return isAuthorized ? (
 		<>
-			<Toaster />
 			<div className='flex h-full'>
 				<SidebarAdmin />
 				<div className='flex-1 flex flex-col'>
