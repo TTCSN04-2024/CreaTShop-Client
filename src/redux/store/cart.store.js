@@ -1,39 +1,36 @@
-import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import toast from 'react-hot-toast';
-import useAuth from '../../hook/useAuth';
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
     cartItems: [],
-    cartQuantity: 0,
+    cartQuantity: 0, // Số lượng tổng các sản phẩm
     cartTotalAmount: 0,
     cartSubTotal: 0,
   },
   reducers: {
     addToCart: (state, action) => {
       const { productId, variantId, quantity } = action.payload;
-      console.log('actionpayload', productId, variantId, quantity);
-    
-      // Tìm mục trong giỏ hàng
+
       const existingItem = state.cartItems.find(
         (item) => item.productId === productId && item.variantId === variantId
       );
-    
+
       if (existingItem) {
-        // Nếu mục đã tồn tại, cập nhật số lượng
         existingItem.quantity += quantity;
       } else {
-        // Nếu không tìm thấy, thêm mục mới vào giỏ hàng
         state.cartItems.push({ productId, variantId, quantity });
       }
-    
-      console.log('state.cartItems', state.cartItems);
+
+      // Cập nhật tổng số lượng sản phẩm
+      state.cartQuantity = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
     },
-    
     updateQuantity: (state, action) => {
       const { productId, variantId, quantity } = action.payload;
+
       const item = state.cartItems.find(
         (cartItem) =>
           cartItem.productId === productId &&
@@ -42,8 +39,13 @@ const cartSlice = createSlice({
       if (item) {
         item.quantity = quantity;
       }
-    },
 
+      // Cập nhật tổng số lượng sản phẩm
+      state.cartQuantity = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+    },
     removeFromCart: (state, action) => {
       const { productId, variantId } = action.payload;
       state.cartItems = state.cartItems.filter(
@@ -51,17 +53,26 @@ const cartSlice = createSlice({
           !(cartItem.productId === productId &&
             cartItem.variantId === variantId)
       );
-    },
 
+      // Cập nhật tổng số lượng sản phẩm
+      state.cartQuantity = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+    },
     clearCart: (state) => {
       state.cartItems = [];
       state.cartQuantity = 0;
       state.cartTotalAmount = 0;
       state.cartSubTotal = 0;
     },
+    setCartItems: (state, action) => {
+      state.cartItems = action.payload;
+      state.cartQuantity = action.payload.reduce((total, item) => total + item.quantity, 0);
+    },
   },
 });
 
-export const { addToCart, updateQuantity, removeFromCart, clearCart } =
+export const { addToCart, updateQuantity, removeFromCart, clearCart, setCartItems } =
   cartSlice.actions;
 export default cartSlice.reducer;

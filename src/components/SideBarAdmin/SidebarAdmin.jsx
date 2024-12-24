@@ -14,7 +14,7 @@ const SidebarAdmin = () => {
     const location = useLocation();
 
     return (
-        <div className='sidebar-admin'>
+        <div className='sidebar-admin h-screen'>
             <Link to={'/'} className='sidebar-admin__logo'><i>CreaT Admin</i></Link>
             <div className='sidebar-admin__menu'>
                 {menuAdmin.map((item, index) => (

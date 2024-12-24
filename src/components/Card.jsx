@@ -15,6 +15,7 @@ const Card = (props) => {
   const [quantity, setQuantity] = useState(1)
   const dispatch = useDispatch()
   const authen = useAuth()
+  console.log('cart',cart)
 
   // Kiểm tra variants
   const hasVariants = props.product.variants?.length > 0;
