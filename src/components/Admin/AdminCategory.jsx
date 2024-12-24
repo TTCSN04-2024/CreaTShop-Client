@@ -201,7 +201,7 @@ const AdminCategory = () => {
                                 clipRule='evenodd'
                               ></path>
                             </svg>
-                            <p className='mb-4 text-gray-500 dark:text-gray-300'>Are you sure you want to delete this item?</p>
+                            <p className='mb-4 text-gray-500 dark:text-gray-300'>Are you sure you want to delete this category?</p>
                             <div className='flex justify-center items-center space-x-4'>
                               <button
                                 onClick={()=>setIsDeleteOpen(false)}
