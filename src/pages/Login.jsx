@@ -43,9 +43,11 @@ const Login = () => {
 											email: currUser.data.data.email,
 										});
 										if (roles.includes('ROLE_ADMIN')) {
+											window.location.href = '/admin/dashboard';
 											navigate('/admin/dashboard');
 											toast.success('login as ADMIN');
 										} else if (roles.includes('ROLE_USER')) {
+											window.location.href = '/';
 											navigate('/');
 											toast.success('login as USER');
 										}
