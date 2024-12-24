@@ -2,14 +2,10 @@ import React, { useEffect, useState } from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import useAuth from '../hook/useAuth';
 import {FaShoppingCart} from 'react-icons/fa';
-import useCart from '../hook/useCart';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
-import toast from 'react-hot-toast';
 const Header = () => {
 	const currentUser = useAuth();
 	const {clearUser} = useAuth();
-	const {cart} = useCart();
 	const [cartItemCount, setCartItemCount] = useState(0);
 	const getAllCart = async() =>{
 		try{
@@ -19,17 +15,14 @@ const Header = () => {
 				}
 			})
 			setCartItemCount(res.data.data.length)
-
 		}
 		catch(err){
-		    // toast.error(err.message)
 		}
 	}
 
 	useEffect(()=>{
 		getAllCart()
-		
-	},[cartItemCount])
+	},[])
 
 	const handleLogout = () => {
 		clearUser();
