@@ -110,7 +110,7 @@ const Header = () => {
 									</ul>
 								</div>
 							) : (
-								<NavLink to='/login'>Login</NavLink>
+								<NavLink exact to='/login'>Login</NavLink>
 							)}
 						</div>
 					</nav>

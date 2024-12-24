@@ -18,6 +18,7 @@ import ProductDetail from './components/ProductDetail/ProductDetail';
 import Cart from './pages/Cart';
 import CheckOut from './pages/CheckOut';
 import { Toaster } from 'react-hot-toast';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 	const routers = useRoutes([
@@ -94,6 +95,7 @@ function App() {
 
 	return (
 		<>
+			<ScrollToTop />
 			<Toaster
 				position='top-center'
 				reverseOrder={false}
