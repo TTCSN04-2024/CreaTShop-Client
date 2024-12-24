@@ -15,7 +15,7 @@ const SidebarAdmin = () => {
 
     return (
         <div className='sidebar-admin'>
-            <Link to={'/'} className='sidebar-admin__logo'>Admin Panel</Link>
+            <Link to={'/'} className='sidebar-admin__logo'><i>CreaT Admin</i></Link>
             <div className='sidebar-admin__menu'>
                 {menuAdmin.map((item, index) => (
                     <NavLink

@@ -93,7 +93,7 @@ const Cart = () => {
   }, []);
 
   return (
-    <div className='pt-24 h-screen'>
+    <div className=''>
       <div className='app-max-width px-4 sm:px-8 md:px-20 w-full border-t-2 border-gray100'>
         <h1 className="text-2xl sm:text-4xl text-center sm:text-left mt-6 mb-2">
           Cart
@@ -108,24 +108,26 @@ const Cart = () => {
           </Link>
         </div>
       </div>
+      {/**Table */}
       <div className="app-max-width px-4 sm:px-8 md:px-20 mb-14 flex flex-col lg:flex-row">
         <div className="h-full w-full lg:w-4/6 mr-4">
           <table className="w-full mb-6">
             <thead>
               <tr className="border-t-2 border-b-2 border-gray200">
                 <th className="font-normal text-left sm:text-center py-2 xl:w-72">
-                  Product Details
+                  Chi tiết đơn hàng
                 </th>
                 <th className='font-normal py-2 hidden sm:block text-center'>Đơn giá</th>
                 <th className="font-normal py-2">Số lượng</th>
                 <th className="font-normal py-2 text-right">Thành tiền</th>
-                <th className="font-normal py-2 text-right">Action</th>
+                <th className="font-normal py-2 text-right"></th>
               </tr>
             </thead>
             <tbody>
               {cartLength === 0 ? (
                 <tr className="w-full text-center h-60 border-b-2 border-gray200">
-                  <td colSpan={5}>Cart is empty</td>
+                  <td colSpan={5}>Giỏ hàng của bạn trống mất rồi. Hãy quay lại <span className='text-blue-500'><Link to={'/shop'}>Shop</Link></span></td>
+                  
                 </tr>
               ) : (
                 cartItems.map((item) => (
@@ -196,6 +198,37 @@ const Cart = () => {
               </tfoot>
             )}
           </table>
+        </div>
+        {/**Container Total */}
+        <div className='h-full w-full lg:w-4/12 mt-10 lg:mt-0'>
+            <div className="border border-gray500 divide-y-2 divide-gray200 p-6">
+              <h2 className="text-xl mb-3">Cart Total </h2>
+              <div className="flex justify-between py-2">
+                <span className="uppercase">Tổng tiền:</span>
+                <span> {cartLength > 0 && calculateTotal().toLocaleString()} VNĐ</span>
+              </div>
+              <div className="py-3">
+                <span className='uppercase'>Hình thức giao hàng</span>
+                <div className='mt-3 space-y-2'>
+                  <div className='flex justify-between'>
+                    <div>
+                      <input type="radio" id='cod'/>
+                      <label htmlFor="cod" className='cursor-pointer'>Thanh toán khi nhận hàng</label>
+                    </div>
+                    <div>
+
+                    </div>
+
+
+                  </div>
+
+                </div>
+              </div>
+              <button className=' w-full bg-red-500 text-white py-3 mt-3'>
+                Checkout
+              </button>
+            </div>
+
         </div>
       </div>
     </div>

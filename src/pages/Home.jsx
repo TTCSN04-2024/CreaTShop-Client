@@ -30,7 +30,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className='pt-24'>
+      <div className=''>
         <Slider />
       </div>
       <h1 className="text-center text-3xl font-bold mb-10">Home</h1>
