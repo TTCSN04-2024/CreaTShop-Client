@@ -1,30 +1,26 @@
-import Header from '../common/Header'
-import { Outlet } from 'react-router-dom'
-import Footer from '../common/Footer'
+import Header from '../common/Header';
+import { Outlet } from 'react-router-dom';
+import Footer from '../common/Footer';
 import { Toaster } from 'react-hot-toast';
+
 const MainLayout = () => {
   return (
-    <div>
-    <Toaster
-        position="top-center"
-        toastOptions={{
-          style: {
-            padding: '16px',
-            color: '#333',
-          },
-        }}
-      />
+    <div className="flex flex-col min-h-screen">
+      {/* Header */}
       <Header />
-      <div className="container">
-        <div className="row">
-          <div className="">
-            <Outlet/>
-          </div>
-        </div>
-      </div>
-      <Footer/>
-    </div>
-  )
-}
 
-export default MainLayout
+      {/* Content */}
+      <main className="flex-grow">
+        <div className="container mx-auto pt-24">
+          <Outlet />
+        </div>
+      </main>
+
+      {/* Footer */}
+      <Footer />
+
+    </div>
+  );
+};
+
+export default MainLayout;
