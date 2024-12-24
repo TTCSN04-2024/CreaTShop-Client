@@ -2,10 +2,9 @@ import React from 'react'
 
 const AdminOrder = () => {
   return (
-    <div className=''>
+    <div className='p-4'>
       <div>
-        <p>adminOrder</p>
-
+        <p><i>WILL BE UPDATE SOON</i></p>
       </div>
     </div>
   )
