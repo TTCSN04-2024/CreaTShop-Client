@@ -5,14 +5,12 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import {login} from '../api/auth.api';
 import useAuth from '../hook/useAuth';
-// import { useSelector } from "react-redux";
-import {currentUser} from '../api/user.api';
 
 const Login = () => {
 	const navigate = useNavigate();
 	const authen = useAuth();
 	return (
-		<div className='flex flex-col items-center justify-center h-screen'>
+		<div className='flex flex-col items-center h-screen'>
 			<div className='border border-gray-300 p-16 rounded-lg shadow-lg'>
 				<div className='flex flex-col items-center justify-center'>
 					<h1 className='text-4xl font-bold mb-4'>Login</h1>
