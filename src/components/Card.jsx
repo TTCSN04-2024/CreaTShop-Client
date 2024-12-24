@@ -17,7 +17,7 @@ const Card = (props) => {
   const authen = useAuth()
 
   // Kiểm tra variants
-  const hasVariants = props.product.variants.length > 0;
+  const hasVariants = props.product.variants?.length > 0;
 
   // Xử lý thêm sản phẩm vào giỏ hàng
   const handleAddToCart = async () => {
@@ -101,7 +101,7 @@ const Card = (props) => {
         <NavLink to={`/product/${props.product.id}`}>
           <h3 className='text-lg font-semibold hover:text-blue-400 hover:duration-700'>{props.product.name}</h3>
         </NavLink>
-        <p className='text-gray-700'>${props.product.price.toFixed(2)}</p>
+        <p className='text-gray-700'>{(props.product.price).toLocaleString()} VNĐ</p>
       </div>
 
       {/* Nút điều khiển */}
